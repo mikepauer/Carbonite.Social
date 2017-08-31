@@ -33,7 +33,7 @@ Nx.Social.PunksHUD = {}
 Nx.Social.TeamHUD = {}
 Nx.Social.Cols = {}
 
-CarboniteSocial = LibStub("AceAddon-3.0"):NewAddon("CarboniteSocial","AceEvent-3.0","AceTimer-3.0","AceComm-3.0")
+CarboniteSocial = LibStub("AceAddon-3.0"):NewAddon("CarboniteSocial", "AceTimer-3.0", "AceEvent-3.0", "AceComm-3.0")
 
 local L = LibStub("AceLocale-3.0"):GetLocale("Carbonite.Social", true)
 
