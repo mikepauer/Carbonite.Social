@@ -777,9 +777,10 @@ function Nx.Social:Create()
 	tinsert (UISpecialFrames, frm:GetName())
 
 	win:SetUser (self, self.OnWin)
-	win:RegisterEvent ("FRIENDLIST_SHOW", self.OnFriendListUpdate)
-	win:RegisterEvent ("FRIENDLIST_UPDATE", self.OnFriendListUpdate)
-	win:RegisterEvent ("GUILD_ROSTER_UPDATE", self.OnFriendListUpdate)
+	LibStub("AceEvent-3.0"):Embed(win)
+	win:RegisterEvent ("FRIENDLIST_SHOW", Nx.Social.OnFriendListUpdate)
+	win:RegisterEvent ("FRIENDLIST_UPDATE", Nx.Social.OnFriendListUpdate)
+	win:RegisterEvent ("GUILD_ROSTER_UPDATE", Nx.Social.OnFriendListUpdate)
 
 	-- FF
 
@@ -859,7 +860,7 @@ function Nx.Social:OnFriendListUpdate (event)
 	end
 --]]
 
-	self.List:Update()
+	Nx.Social.List:Update()
 end
 
 ---------------------------------------------------------------------------------------
