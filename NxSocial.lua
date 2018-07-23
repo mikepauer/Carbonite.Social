@@ -500,7 +500,7 @@ function CarboniteSocial:OnInitialize()
 	soc[rn]["PkAct"] = soc[rn]["PkAct"] or {}
 	Nx.Social:Init()
 	CarboniteSocial:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED", "OnCombat_log_event_unfiltered")
-	CarboniteSocial:RegisterEvent("WORLD_MAP_UPDATE", "On_Event")
+--	CarboniteSocial:RegisterEvent("WORLD_MAP_UPDATE", "On_Event")
 	CarboniteSocial:RegisterComm("carbmodule",Nx.Social.OnChat_msg_addon)
 --	CarboniteSocial.EventTimer = CarboniteSocial:ScheduleRepeatingTimer("On_Update",2)
 	Nx:AddToConfig("Social & Punks Module",socialConfig(),L["Social & Punks Module"])
