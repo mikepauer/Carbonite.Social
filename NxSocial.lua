@@ -500,7 +500,8 @@ function CarboniteSocial:OnInitialize()
 	soc[rn]["PkAct"] = soc[rn]["PkAct"] or {}
 	Nx.Social:Init()
 	CarboniteSocial:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED", "OnCombat_log_event_unfiltered")
---	CarboniteSocial:RegisterEvent("WORLD_MAP_UPDATE", "On_Event")
+	--CarboniteSocial:RegisterEvent("PLAYER_ENTERING_WORLD", "On_Event")
+	Nx.Social.UpdateTicker = C_Timer.NewTicker(0.5, function() CarboniteSocial:On_Event("FORCE_UPDATE"); end)
 	CarboniteSocial:RegisterComm("carbmodule",Nx.Social.OnChat_msg_addon)
 --	CarboniteSocial.EventTimer = CarboniteSocial:ScheduleRepeatingTimer("On_Update",2)
 	Nx:AddToConfig("Social & Punks Module",socialConfig(),L["Social & Punks Module"])
@@ -523,7 +524,7 @@ function Nx.Social:SetCols()
 end
 
 function CarboniteSocial:On_Event(event,...)
-	if event == "WORLD_MAP_UPDATE" then
+	if event == "PLAYER_ENTERING_WORLD" or event == "FORCE_UPDATE" then
 		Nx.Social.PunksHUD:Update()
 		Nx.Social.TeamHUD:Update()
 		Nx.Social:OnUpdate()
@@ -1620,7 +1621,7 @@ function Nx.Social.List:Update()
 			if punk.Class then
 				list:ItemSet (4, punk.Class)
 			end
-			local mapName = GetMapNameByID(punk.MId) or "?"
+			local mapName = Nx.Map:GetMapNameByID(punk.MId) or "?"
 			list:ItemSet (5, format ("%s %d %d", mapName, punk.X, punk.Y))
 
 			list:ItemSet (6, format (L["Near %s"], punk.FinderName))
@@ -1663,7 +1664,7 @@ function Nx.Social.List:Update()
 			end
 
 			if mId then
-				local name = GetMapNameByID(tonumber (mId, 16)) or "?"
+				local name = Nx.Map:GetMapNameByID(tonumber (mId, 16)) or "?"
 				list:ItemSet (5, name)
 			end
 
@@ -2007,7 +2008,7 @@ function Nx.Social:UpdateIcons (map)
 					local f = map:GetIcon (2)
 					if map:ClipFrameW (f, x, y, 14, 14, 0) then
 						local lvl = punk.Lvl > 0 and punk.Lvl or "?"
-						local mapName = GetMapNameByID(punkMId) or "?"
+						local mapName = Nx.Map:GetMapNameByID(punkMId) or "?"
 						f.NxTip = format (L["*|cffff0000%s %s, %d:%02d ago\n%s (%d,%d)"], pName, lvl, dur / 60 % 60, dur % 60, mapName, punk.X, punk.Y)
 						f.NXType = 3001
 						f.NXData = pName
@@ -2024,7 +2025,7 @@ function Nx.Social:UpdateIcons (map)
 						local f = map:GetIcon (i)
 						if map:ClipFrameW (f, x, y, 10, 10, 0) then
 							local lvl = punk.Lvl > 0 and punk.Lvl or "?"
-							local mapName = GetMapNameByID(punkMId) or "?"
+							local mapName = Nx.Map:GetMapNameByID(punkMId) or "?"
 							f.NxTip = format (L["|cffff6060%s %s, %d:%02d ago\n%s (%d,%d)"], pName, lvl, dur / 60 % 60, dur % 60, mapName, punk.X, punk.Y)
 							f.NXType = 3001
 							f.NXData = pName
@@ -2075,7 +2076,7 @@ function Nx.Social:GetPunkPasteInfo (name)
 
 		local lvl = punk.Lvl > 0 and punk.Lvl or "?"
 		local class = punk.Class or "?"
-		return format (L["Punk: %s, %s %s at %s %d %d"], name, lvl, class, GetMapNameByID(punk.MId) or "?", punk.X, punk.Y)
+		return format (L["Punk: %s, %s %s at %s %d %d"], name, lvl, class, Nx.Map:GetMapNameByID(punk.MId) or "?", punk.X, punk.Y)
 	end
 
 	return ""
