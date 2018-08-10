@@ -779,7 +779,7 @@ function Nx.Social:Create()
 
 	win:SetUser (self, self.OnWin)
 	LibStub("AceEvent-3.0"):Embed(win)
-	win:RegisterEvent ("FRIENDLIST_SHOW", Nx.Social.OnFriendListUpdate)
+	--win:RegisterEvent ("FRIENDLIST_SHOW", Nx.Social.OnFriendListUpdate)
 	win:RegisterEvent ("FRIENDLIST_UPDATE", Nx.Social.OnFriendListUpdate)
 	win:RegisterEvent ("GUILD_ROSTER_UPDATE", Nx.Social.OnFriendListUpdate)
 
@@ -894,10 +894,10 @@ function Nx.Social:OnUpdate()
 			end
 --]]
 
-			local f = ChannelFrameDaughterFrame
+			--[[local f = ChannelFrameDaughterFrame
 			if f:IsVisible() then
 				f:SetFrameLevel (wf:GetFrameLevel() + 100)
-			end
+			end]]--
 		end
 	end
 end
