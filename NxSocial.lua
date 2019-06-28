@@ -1784,7 +1784,7 @@ function Nx.Social:AddLocalPunk (name, plyrNear, level, class)
 			local typ = self.Punks[name] and L["|cffff4040Punk"] or L["Enemy"]
 			Nx.prt (L["%s %s detected near you"], typ, name)
 			if Nx.scdb.profile.Social.PunkNewLocalWarnSnd then
-				Nx:PlaySoundFile ("sound\\doodad\\belltolltribal.ogg")
+				Nx:PlaySoundFile (566027)
 			end
 		end
 	end
@@ -1854,7 +1854,7 @@ function Nx.Social:GetPunk (name, plyrNear, mId, x, y)
 			UIErrorsFrame:AddMessage (format (L["|cffff4000%s|r detected %s!"], name, s), 1, 1, 0, 1)
 		end
 		if Nx.scdb.profile.Social.PunkMAlertSnd then
-			Nx:PlaySoundFile ("sound\\spells\\antiholy.ogg")
+			Nx:PlaySoundFile (568986)
 		end
 		punk.Alert = true
 	end
