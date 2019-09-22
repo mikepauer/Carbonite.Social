@@ -1,0 +1,13 @@
+## Interface: 11302
+## Title: Carbonite Social & Punks Classic
+## Version: 1.13.2-0.1
+## Author: Rythal
+## Notes: Released Under GPL
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: NXSocial
+## RequiredDeps: CarboniteClassic
+
+Locales\locales.xml
+NxSocial.lua
+
