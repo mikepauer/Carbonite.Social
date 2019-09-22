@@ -1442,11 +1442,10 @@ function Nx.Social.List:Update()
 
 		local fI = {}
 
-		local cnt = C_FriendList.GetNumFriends()
+		local cnt = GetNumFriends()
 
 		for n = 1, cnt do
-			local friend = C_FriendList.GetFriendInfoByIndex(n)
-			local name, level, class, area, connected, status, note = friend.name, friend.level, friend.class, friend.area, friend.connected, friend.afk, friend.notes
+			local name, level, class, area, connected, status, note = GetFriendInfo (n)
 			if name then
 
 				fI[name] = n
