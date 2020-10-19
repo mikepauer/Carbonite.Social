@@ -855,7 +855,7 @@ function Nx.Social:OnFriendListUpdate (event)
 --[[
 	Nx.prt ("OnFriendListUpdate %s", event)
 
-	for n = 1, GetNumFriends() do
+	for n = 1, C_FriendList.GetNumFriends() do
 		local name, level, class, area, connected, status, note = GetFriendInfo (n)
 		Nx.prt ("#%s %s", n, name or "nil")
 	end
@@ -1336,7 +1336,7 @@ end
 
 function Nx.Social.List:FindFriendI (friend)
 
-	local cnt = GetNumFriends()
+	local cnt = C_FriendList.GetNumFriends()
 	for n = 1, cnt do
 
 		local name, level, class, area, connected, status, note = GetFriendInfo (n)
@@ -1442,7 +1442,7 @@ function Nx.Social.List:Update()
 
 		local fI = {}
 
-		local cnt = GetNumFriends()
+		local cnt = C_FriendList.GetNumFriends()
 
 		for n = 1, cnt do
 			local name, level, class, area, connected, status, note = GetFriendInfo (n)
