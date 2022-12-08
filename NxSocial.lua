@@ -1124,7 +1124,7 @@ function Nx.Social.List:Create()
 			local i = self:FindFriendI (self.MenuSelName)
 			if i then
 				self.FriendsFrame["NotesID"] = i
-				StaticPopup_Show ("SET_FRIENDNOTE", GetFriendInfo (i))
+				StaticPopup_Show ("SET_FRIENDNOTE", C_FriendList.GetFriendInfoByIndex (i).name)
 			end
 		end
 	end
@@ -1305,7 +1305,7 @@ function Nx.Social.List:OnListEvent (eventName, sel, val2, click)
 		local i = self:FindFriendI (name)
 		if i then
 --			Nx.prt ("Sel %s", i)
-			SetSelectedFriend (i)
+			C_FriendList.SetSelectedFriend (i)
 		end
 	end
 
@@ -1338,8 +1338,8 @@ function Nx.Social.List:FindFriendI (friend)
 
 	local cnt = C_FriendList.GetNumFriends()
 	for n = 1, cnt do
-
-		local name, level, class, area, connected, status, note = GetFriendInfo (n)
+		local friendgrab = C_FriendList.GetFriendInfoByIndex(n)
+		local name, level, class, area, connected, status, note = friendgrab.name, friendgrab.level, friendgrab.className, friendgrab.area, friendgrab.connected, friendgrab.notes
 
 		if name == friend then
 			return n
@@ -1431,12 +1431,11 @@ function Nx.Social.List:Update()
 
 		local data = {}
 		local f2p = {}
-		local fConnected = {}
-
-		for pName, friends in pairs (pal) do
-			for fName, _ in pairs (friends) do
+		local fConnected = {}		
+		for pName, friends in pairs (pal) do			
+			for fName, _ in pairs (friends) do				
 				tinsert (data, format ("%s~%s", pName, fName))
-				f2p[fName] = pName
+				f2p[fName] = pName				
 			end
 		end
 
@@ -1445,9 +1444,9 @@ function Nx.Social.List:Update()
 		local cnt = C_FriendList.GetNumFriends()
 
 		for n = 1, cnt do
-			local name, level, class, area, connected, status, note = GetFriendInfo (n)
-			if name then
-
+			local friendgrab = C_FriendList.GetFriendInfoByIndex (n)			
+			local name, level, class, area, connected, status, note = friendgrab.name, friendgrab.level, friendgrab.className, friendgrab.area, friendgrab.connected, friendgrab.afk, friendgrab.notes
+			if name then				
 				fI[name] = n
 				fConnected[name] = connected
 
@@ -1516,7 +1515,8 @@ function Nx.Social.List:Update()
 			local name, level, class, area, connected, status, note
 
 			if i then
-				name, level, class, area, connected, status, note = GetFriendInfo (i)
+				local friendgrab = C_FriendList.GetFriendInfoByIndex(i)
+				name, level, class, area, connected, status, note = friendgrab.name, friendgrab.level, friendgrab.className, friendgrab.area, friendgrab.connected, friendgrab.afk, friendgrab.notes
 			end
 
 			if connected then
